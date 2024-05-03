@@ -30,6 +30,15 @@ services:
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
 
+  user_service:
+    depends_on:
+      - mysql_userDB
+    networks:
+      - byte_driver_network
+    build: ./backend/userService
+    ports:
+      - "8080:8080"
+
 
 volumes:
   kafka_data:
