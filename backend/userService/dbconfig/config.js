@@ -1,18 +1,17 @@
 const Sequelize = require("sequelize")
 
 // const sequelize = new Sequelize(
-//     'game_api',
+//     'UserDB',
 //     'root',
-//     'password',
+//     'slay123!',
 //     {
-//         host: 'mysql_db',
+//         host: 'mysql_userDB',
 //         dialect: 'mysql'
 //     }
 // );
 
-//CAMBRY'S LOCAL MYSQL
 const sequelize = new Sequelize(
-  '',
+  'userdb',
   'root',
   'D&D4bookwyrmbam',
    {

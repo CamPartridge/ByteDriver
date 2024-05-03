@@ -1,0 +1,15 @@
+Passwords:
+    - at least 6 characters
+    - at most 16 characters
+    - at least one digit
+    - at least one special character
+    - only contains letters, digits, and the special characters !@#$%^&*
+    Example: Girlboss123!
+
+Emails:
+    - at least one character 
+    - followed by an @ symbol
+    - followed by at least two characters
+    - followed by a dot
+    - followed by at least two characters
+    Example: girlboss@gmail.com
