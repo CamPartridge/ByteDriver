@@ -1,0 +1,27 @@
+CREATE DATABASE OrderDB;
+
+USE OrderDB;
+
+CREATE TABLE Users(
+    UserID INT NOT NULL,
+    PhoneNumber BIGINT NOT NULL UNIQUE,
+    PRIMARY KEY (UserID)
+);
+
+CREATE TABLE Orders(
+    OrderID INT NOT NULL AUTO_INCREMENT,
+    ItemName VARCHAR(50) NOT NULL,
+    ItemPrice DECIMAL(19,4) NOT NULL,
+    Quantity INT NOT NULL,
+    PRIMARY KEY (OrderID)
+) AUTO_INCREMENT = 10000;
+
+CREATE TABLE UserOrders(
+    OrderID INT NOT NULL,
+    ByterID INT NOT NULL,
+    DriverID INT NOT NULL,
+    Status VARCHAR(10) NOT NULL,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ByterID) REFERENCES Users(UserID),
+    FOREIGN KEY (DriverID) REFERENCES Users(UserID)
+);

@@ -24,7 +24,7 @@ services:
       - mongo_data:/data/db
 
   mysql_userDB:
-    image:  mysql
+    image:  mysql_users
     ports:
       - 8000:3306
     restart: always
@@ -35,7 +35,19 @@ services:
       - mysql_userDB_data:/var/lib/mysql
     networks:
       - byte_driver_network
+
     
+  mysql_orderDB:
+    image:  mysql_orders
+    ports:
+      - 8001:3306
+    restart: always
+    build:
+      context: ./backend/orderService
+      dockerfile: mysql_orderDB.dockerfile
+    networks:
+      - byte_driver_network
+
   kafka:
     image: 'bitnami/kafka:latest'
     networks:
@@ -49,6 +61,15 @@ services:
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+
+  user_service:
+    depends_on:
+      - mysql_userDB
+    networks:
+      - byte_driver_network
+    build: ./backend/userService
+    ports:
+      - "8080:8080"
 
 
 volumes:
