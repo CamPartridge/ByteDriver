@@ -23,6 +23,13 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - byte_driver_network
+
   mysql_userDB:
     image:  mysql_users
     ports:
