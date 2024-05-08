@@ -118,6 +118,13 @@ paths:
       responses:
         '200':
           description: Menu item updated successfully
+    delete:
+      tags:
+        - restaurantService
+      summary: Delete a menu item
+      responses:
+        '204':
+          description: Menu item deleted successfully
 
     
 

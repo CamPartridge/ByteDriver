@@ -1,0 +1,92 @@
+********** ENDPOINT INFORMATION **********
+- Can only get ID parameter from the database
+    - Essentially locks user from ever having access to it (May want to change so restaurant owners can have access to it)
+- Can only add one restaurant at a time
+- Some endpoints only work with .dict() even if it is deprecated - if not working change to .model_dump() 
+
+********** DUMMY RESTAURANTS TO ADD FOR TESTING **********
+
+{
+  "name": "Taco Fiesta",
+  "hours": "Mon-Sun: 10:00 AM - 9:00 PM",
+  "location": "321 Jalapeño Street, Fiesta City, TX 12345",
+  "menu": [
+    {
+      "name": "Classic Beef Taco",
+      "description": "Seasoned ground beef, lettuce, cheese, and salsa in a crispy corn tortilla",
+      "price": 2.99
+    },
+    {
+      "name": "Chicken Quesadilla",
+      "description": "Grilled chicken, melted cheese, and sautéed onions and peppers folded in a flour tortilla",
+      "price": 7.99
+    },
+    {
+      "name": "Vegetarian Burrito",
+      "description": "Black beans, rice, lettuce, tomato, avocado, and cheese wrapped in a warm flour tortilla",
+      "price": 6.99
+    }
+  ]
+}
+
+{
+  "name": "Sushi Haven",
+  "hours": "Mon-Fri: 11:30 AM - 10:00 PM, Sat-Sun: 12:00 PM - 11:00 PM",
+  "location": "789 Sakura Avenue, Zen City, CA 54321",
+  "menu": [
+    {
+      "name": "Sashimi Platter",
+      "description": "Assorted slices of fresh raw fish served with soy sauce and wasabi",
+      "price": 18.99
+    },
+    {
+      "name": "California Roll",
+      "description": "A classic sushi roll filled with crab, avocado, and cucumber",
+      "price": 10.99
+    },
+    {
+      "name": "Tempura Udon",
+      "description": "Japanese noodle soup with tempura-battered shrimp and vegetables",
+      "price": 12.99
+    }
+  ]
+}
+
+{
+  "name": "The Hungry Hippo",
+  "hours": "Mon-Sat: 11:00 AM - 10:00 PM, Sun: 12:00 PM - 8:00 PM",
+  "location": "456 Elm Street, Metropolis, CA 98765",
+  "menu": [
+    {
+      "name": "Hippo Burger",
+      "description": "A delicious burger made with prime beef, lettuce, tomato, onion, and special sauce",
+      "price": 9.99
+    },
+    {
+      "name": "Hippo's Delight Salad",
+      "description": "Fresh mixed greens with cherry tomatoes, cucumber, avocado, and balsamic vinaigrette",
+      "price": 7.99
+    },
+    {
+      "name": "Hippo's Pasta",
+      "description": "Penne pasta with homemade marinara sauce, topped with parmesan cheese",
+      "price": 12.99
+    }
+  ]
+}
+
+
+********** DUMMY MENU ITEMS TO ADD FOR TESTING **********
+
+{
+  "name": "Dragon Roll",
+  "description": "A sushi roll filled with eel, cucumber, and avocado, topped with thinly sliced avocado and eel sauce",
+  "price": 14.99
+}
+
+{
+  "name": "Hippo's Special Pizza",
+  "description": "A mouthwatering pizza topped with pepperoni, mushrooms, bell peppers, onions, and extra cheese",
+  "price": 14.99
+}
+
