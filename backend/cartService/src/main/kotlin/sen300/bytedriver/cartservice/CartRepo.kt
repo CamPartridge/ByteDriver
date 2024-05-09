@@ -1,4 +1,8 @@
 package sen300.bytedriver.cartservice
 
-interface CartRepo {
+import org.springframework.data.repository.CrudRepository
+import org.springframework.stereotype.Repository
+
+@Repository
+interface CartRepo :CrudRepository<Cart, String> {
 }
