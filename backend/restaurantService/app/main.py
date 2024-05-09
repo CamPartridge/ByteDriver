@@ -9,6 +9,8 @@ from pymongo import MongoClient, ReturnDocument
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from bson import ObjectId, Regex
+import requests
+import atexit
 
 from typing_extensions import Annotated
 
@@ -45,8 +47,52 @@ class RestaurantModel(BaseModel):
         if not isinstance(v, MenuItem):
             raise ValueError("Each item in menu must be a MenuItem")
         return v
+    
+class EurekaClient:
+    def __init__(self, app_name, port):
+        self.app_name = app_name
+        self.port = port
+        self.instance_id = None
+
+    def register(self, eureka_url):
+        data = {
+            "instance": {
+                "hostName": self.app_name,
+                "app": self.app_name,
+                "vipAddress": self.app_name,
+                "instanceId": f"{self.app_name}:{self.port}",
+                "port": {"$": self.port, "@enabled": "true"},
+                "securePort": {"$": 443, "@enabled": "false"},
+                "homePageUrl": f"http://{self.app_name}:{self.port}/",
+                "statusPageUrl": f"http://{self.app_name}:{self.port}/status",
+                "healthCheckUrl": f"http://{self.app_name}:{self.port}/health",
+                "dataCenterInfo": {
+                    "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+                    "name": "MyOwn"
+                }
+            }
+        }
+
+        response = requests.post(f"{eureka_url}/apps/{self.app_name}", json=data)
+        response.raise_for_status()
+        self.instance_id = f"{self.app_name}:{self.port}"
+
+    def unregister(self, eureka_url):
+        if self.instance_id:
+            response = requests.delete(f"{eureka_url}/apps/{self.app_name}/{self.instance_id}")
+            response.raise_for_status()
+
+def register_with_eureka():
+    eureka_url = "http://eurekaRegistry:8761/eureka" 
+    client = EurekaClient("restaurantService", 80)
+    client.register(eureka_url)
+    atexit.register(client.unregister, eureka_url)
 
 app = FastAPI()
+
+@app.on_event("startup")
+async def startup_event():
+    register_with_eureka()
 
 @app.get("/")
 async def root():
