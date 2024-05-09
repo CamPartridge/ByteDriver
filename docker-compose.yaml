@@ -3,24 +3,6 @@ networks:
 
 services:
 
-  eurekaRegistry:
-    container_name: eurekaRegistry
-    image: steeltoeoss/eureka-server:latest
-    hostname: eurekaRegistry
-    ports:
-      - 8761:8761
-    networks:
-      - byte_driver_network
-    external_links:
-      - eurekaRegistry:eurekaRegistry
-
-  redis:
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    networks:
-      - byte_driver_network
-
   restaurantService:
     image: restaurant-service
     build:
@@ -41,18 +23,12 @@ services:
     volumes:
       - mongo_data:/data/db
 
-  cartService:
-    image: cart-service
-    build:
-      context: ./backend/cartService
-      dockerfile: Dockerfile
+  redis:
+    image: redis:latest
     ports:
-      - 9000:8080
+      - "6379:6379"
     networks:
       - byte_driver_network
-    depends_on:
-      - redis
-      - eurekaRegistry
 
   mysql_userDB:
     image:  mysql_users
