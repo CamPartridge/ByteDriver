@@ -31,15 +31,6 @@ services:
       - byte_driver_network
     depends_on:
       - mongo
-  
-  mongo:
-    image: mongo:latest
-    ports:
-      - 27017:27017
-    networks:
-      - byte_driver_network
-    volumes:
-      - mongo_data:/data/db
 
   cartService:
     image: cart-service
@@ -53,6 +44,15 @@ services:
     depends_on:
       - redis
       - eurekaRegistry
+  
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    networks:
+      - byte_driver_network
+    volumes:
+      - mongo_data:/data/db
 
   mysql_userDB:
     image:  mysql_users
@@ -64,6 +64,20 @@ services:
       dockerfile: mysql_userDB.dockerfile
     volumes:
       - mysql_userDB_data:/var/lib/mysql
+    networks:
+      - byte_driver_network
+
+    
+  mysql_orderDB:
+    image:  mysql_orders
+    ports:
+      - 8001:3306
+    restart: always
+    build:
+      context: ./backend/orderService
+      dockerfile: mysql_orderDB.dockerfile
+    # volumes:
+    #   - mysql_orderDB_data:/var/lib/mysql
     networks:
       - byte_driver_network
 
@@ -89,10 +103,9 @@ services:
     build: ./backend/userService
     ports:
       - "8080:8080"
-
-
 volumes:
   kafka_data:
     driver: local
   mongo_data: {}
   mysql_userDB_data: {}
+  mysql_orderDB_data: {}
