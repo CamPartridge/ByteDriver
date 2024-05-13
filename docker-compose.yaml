@@ -52,6 +52,8 @@ services:
     build:
       context: ./backend/orderService
       dockerfile: mysql_orderDB.dockerfile
+    # volumes:
+    #   - mysql_orderDB_data:/var/lib/mysql
     networks:
       - byte_driver_network
 
@@ -84,3 +86,4 @@ volumes:
     driver: local
   mongo_data: {}
   mysql_userDB_data: {}
+  # mysql_orderDB_data: {}
