@@ -7,7 +7,9 @@ import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.awt.Menu
 import java.io.Serializable
+import java.util.concurrent.atomic.AtomicInteger
 
 @RestController
 @RequestMapping("/cart")
@@ -16,6 +18,8 @@ class CartRestController {
     private lateinit var redisTemplate: RedisTemplate<String, Cart>
 
     private var latestId: Int = 0
+
+    private var menuItemIdCounter: Int = 0
 
     @GetMapping("/test")
     @ResponseStatus(code = HttpStatus.OK)
@@ -39,9 +43,21 @@ class CartRestController {
     }
 
     fun saveCartToRedis(cart: Cart) {
+        cart.menuItems.forEach { menuItem ->
+            if (menuItem.id == null) {
+                assignIdToMenuItem(menuItem)
+            }
+        }
         val objectMapper = ObjectMapper()
         val cartJsonString = objectMapper.writeValueAsString(cart)
+
         cart.id?.let { redisTemplate.opsForHash<String, String>().put("carts", it, cartJsonString) }
+    }
+
+    fun assignIdToMenuItem(item: MenuItem): MenuItem {
+        menuItemIdCounter++
+        item.id = menuItemIdCounter
+        return item
     }
     //endregion
 

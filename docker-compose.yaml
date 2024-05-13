@@ -67,18 +67,6 @@ services:
     networks:
       - byte_driver_network
 
-    
-  mysql_orderDB:
-    image:  mysql_orders
-    ports:
-      - 8001:3306
-    restart: always
-    build:
-      context: ./backend/orderService
-      dockerfile: mysql_orderDB.dockerfile
-    networks:
-      - byte_driver_network
-
   kafka:
     image: 'bitnami/kafka:latest'
     networks:
