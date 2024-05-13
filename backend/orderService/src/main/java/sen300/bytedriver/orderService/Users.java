@@ -7,12 +7,12 @@
 package sen300.bytedriver.orderService;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import org.springframework.context.annotation.Primary;
 
 @Entity
-public class User {
+public class Users {
 
     @Id
     private Long userID;
@@ -22,6 +22,16 @@ public class User {
     private String firstName;
 
     private String lastName;
+
+    public Users() {
+    }
+
+    public Users(Long userID, Long phoneNumber, String firstName, String lastName) {
+        this.userID = userID;
+        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     // Getters and setters
     public Long getUserID() {

@@ -8,20 +8,46 @@ package sen300.bytedriver.orderService;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class Order {
+public class Orders {
 
     @Id
+    @GeneratedValue
+    private Long ID;
     private Long orderID;
 
     private String itemName;
-    private float itemPrice;
+    private double itemPrice;
     private int quantity;
 
     // Getters and setters
+
+
+    public Orders() {
+    }
+
+    public Orders(Long orderID, String itemName, double itemPrice, int quantity) {
+        this.orderID = orderID;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.quantity = quantity;
+    }
+
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
+    }
+
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
     public Long getOrderID() {
         return orderID;
     }
@@ -38,12 +64,8 @@ public class Order {
         this.itemName = itemName;
     }
 
-    public float getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
-    }
-
-    public void setItemPrice(float itemPrice) {
-        this.itemPrice = itemPrice;
     }
 
     public int getQuantity() {
