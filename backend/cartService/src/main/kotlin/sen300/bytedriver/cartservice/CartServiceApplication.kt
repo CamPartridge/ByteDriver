@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class CartserviceApplication
+class CartServiceApplication
 
 fun main(args: Array<String>) {
-	runApplication<CartserviceApplication>(*args)
+	runApplication<CartServiceApplication>(*args)
 }
