@@ -23,14 +23,16 @@ services:
 
   restaurantService:
     image: restaurant-service
+    hostname: restaurantService
     build:
       context: ./backend/restaurantService
     ports:
-      - 80:80
+      - 9001:8080
     networks:
       - byte_driver_network
     depends_on:
       - mongo
+      - eurekaRegistry
 
   cartService:
     image: cart-service
@@ -67,7 +69,6 @@ services:
     networks:
       - byte_driver_network
 
-    
   mysql_orderDB:
     image:  mysql_orders
     ports:
@@ -103,6 +104,7 @@ services:
     build: ./backend/userService
     ports:
       - "8080:8080"
+
 volumes:
   kafka_data:
     driver: local

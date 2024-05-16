@@ -1,16 +1,23 @@
 import os
+import logging
 from fastapi import FastAPI
 from typing import Optional, List
+from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Body, HTTPException, status
+from fastapi import Body, HTTPException, status
 from fastapi.responses import Response
-from pydantic import BaseModel, Field, EmailStr, validator
+from pydantic import BaseModel, Field, validator
 from pymongo import MongoClient, ReturnDocument
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from bson import ObjectId, Regex
 
+import requests
+
+import py_eureka_client.eureka_client as eureka_client
+
 from typing_extensions import Annotated
+
 
 MONGO_HOST = "mongo"
 MONGO_PORT = 27017
@@ -46,7 +53,19 @@ class RestaurantModel(BaseModel):
             raise ValueError("Each item in menu must be a MenuItem")
         return v
 
+async def init():
+    await eureka_client.init_async(
+        eureka_server="http://eurekaRegistry:8761/eureka/",
+        app_name="restaurantService",
+        instance_port=9001,
+        instance_host="restaurantService"
+    )
+
 app = FastAPI()
+
+@app.on_event("startup")
+async def startup_event():
+    await init()
 
 @app.get("/")
 async def root():
@@ -198,4 +217,3 @@ async def update_menu_item(restaurant_id: str, menu_item_id: int, menu_item_data
     else:
         return {"message": "Failed to update menu item"}
 
-# TODO: Make sure to put main.py back into /restaurantService/app before running docker-compose up
