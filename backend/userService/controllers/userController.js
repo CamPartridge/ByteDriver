@@ -1,5 +1,6 @@
 const { UniqueConstraintError } = require('sequelize')
 const  User = require("../models/user")
+var { sendEmail } = require("../producer.js")
 
 const userController = {
     create: async (req, res) => {
@@ -14,6 +15,8 @@ const userController = {
                 Email,
                 Type
             })
+
+            sendEmail('Users', 'newUser', JSON.stringify(user.dataValues))
 
             res.status(201).send(user)
 
