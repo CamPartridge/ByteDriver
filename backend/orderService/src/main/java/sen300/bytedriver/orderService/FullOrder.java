@@ -26,6 +26,9 @@ public class FullOrder {
         this.driverID = driverID;
     }
 
+    public FullOrder() {
+    }
+
     public Long getByterID() {
         return byterID;
     }

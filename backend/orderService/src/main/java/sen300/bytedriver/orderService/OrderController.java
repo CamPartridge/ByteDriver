@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/order")
@@ -95,6 +96,14 @@ public class OrderController {
 
     @PatchMapping("/{orderid}/{status}")
     @ResponseStatus(code = HttpStatus.OK)
-
+    public String updateStatus(@PathVariable int orderid, @PathVariable String status){
+        UserOrders order = userOrdersRepo.findByOrderID(orderid);
+        if (order != null) {
+            order.setStatus(status);
+            userOrdersRepo.save(order); // Save the updated order
+            return "Order status successfully updated to: " + status;
+        }
+        return "No order found to update the status";
+    }
 
 }
