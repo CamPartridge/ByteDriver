@@ -1,6 +1,16 @@
 const { Kafka } = require('kafkajs');
 const email = require('./emailCompose.js')
 
+const eurekaClient = require('./eureka-config.js');
+
+eurekaClient.start(error => {
+    if (error) {
+      console.error('Error starting Eureka client', error);
+    } else {
+      console.log('Eureka client started');
+    }
+  });
+
 const kafka = new Kafka({
   clientId: 'NotificationService', // Name as you want
   brokers: ['kafka:9092'], // <ContainerName>:<ExposedPort>
