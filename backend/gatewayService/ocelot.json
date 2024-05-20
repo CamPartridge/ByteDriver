@@ -1,0 +1,92 @@
+{
+  "Routes": [
+    {
+      "ServiceName": "cartService",
+      "DownstreamPathTemplate": "/{everything}",
+      "UpstreamPathTemplate": "/cartservice/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 15
+      },
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection",
+        "Key": null,
+        "Expiry": 0
+      }
+    },
+    {
+      "ServiceName": "restaurantService",
+      "DownstreamPathTemplate": "/{everything}",
+      "UpstreamPathTemplate": "/restaurantservice/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 15
+      },
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection",
+        "Key": null,
+        "Expiry": 0
+      }
+    },
+    {
+      "ServiceName": "orderService",
+      "DownstreamPathTemplate": "/{everything}",
+      "UpstreamPathTemplate": "/orderService/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 15
+      },
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection",
+        "Key": null,
+        "Expiry": 0
+      }
+    },
+    {
+      "ServiceName": "userService",
+      "DownstreamPathTemplate": "/{everything}",
+      "UpstreamPathTemplate": "/userservice/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 15
+      },
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection",
+        "Key": null,
+        "Expiry": 0
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://gatewayService:80",
+    "RequestIdKey": "OcRequestId",
+    "DownstreamScheme": "http",
+    "ReRoutesCaseSensitive": false,
+    "UseServiceDiscovery": true,
+    "ServiceDiscoveryProvider": {
+      "Host": "eurekaRegistry",
+      "Port": 8761,
+      "Type": "Eureka"
+    }
+  }
+}

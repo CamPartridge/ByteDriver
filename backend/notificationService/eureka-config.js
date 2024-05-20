@@ -4,13 +4,15 @@ const { Eureka } = require('eureka-js-client');
 const client = new Eureka({
   instance: {
     app: 'notificationService', 
-    hostName: 'localhost',
-    ipAddr: '127.0.0.1',
+    instanceId: 'notificationService',
+    hostName: 'notificationService',
+    ipAddr: '0.0.0.0',
     port: {
       '$': 8085, // The port your service is running on
       '@enabled': 'true',
     },
     vipAddress: 'notificationService', // The VIP address for your service
+    statusPageUrl: 'http://localhost:8085/',
     dataCenterInfo: {
       '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
       name: 'MyOwn', // Specify your data center info

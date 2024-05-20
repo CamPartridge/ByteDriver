@@ -3,6 +3,10 @@ const  User = require("../models/user")
 var { sendEmail } = require("../producer.js")
 
 const userController = {
+    test: (req, res) => {
+        res.send('Test Success')
+    },
+    
     create: async (req, res) => {
         try {
             const { FirstName, LastName, Password, PhoneNumber, Email, Type } = req.body;
