@@ -6,6 +6,7 @@ const orderController = require("../controllers/orderController.js")
 const userorderController = require("../controllers/userordersController.js")
 
 router.post("/", userController.create, userorderController.create, orderController.create)
+router.get("/order/test", orderController.test)
 router.post("/adduser", userController.createUser)
 
 router.get('/:id(\\d+)', orderController.findAllByOrderID)

@@ -3,6 +3,9 @@ const  Order = require("../models/order.js")
 var { sendEmail } = require("../producer.js")
 
 const orderController = {
+    test: (req, res) => {
+        res.send("Test Success")
+    },
     create:  async (req, res) => {
         try {
 

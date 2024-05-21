@@ -41,7 +41,7 @@
     {
       "ServiceName": "orderService",
       "DownstreamPathTemplate": "/{everything}",
-      "UpstreamPathTemplate": "/orderService/{everything}",
+      "UpstreamPathTemplate": "/orderservice/{everything}",
       "UpstreamHttpMethod": [
         "GET",
         "POST",

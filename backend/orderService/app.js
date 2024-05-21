@@ -4,6 +4,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var orderRoute = require('./routes/orderRoute')
+const eurekaClient = require('./eureka-config.js');
+
+eurekaClient.start(error => {
+    if (error) {
+      console.error('Error starting Eureka client', error);
+    } else {
+      console.log('Eureka client started');
+    }
+});
 
 var app = express();
 
