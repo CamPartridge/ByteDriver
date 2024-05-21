@@ -1,4 +1,11 @@
-FROM ubuntu:latest
-LABEL authors="Cambry Partridge"
+FROM node:16-slim
 
-ENTRYPOINT ["top", "-b"]
+COPY . .
+
+RUN npm install
+
+ENV PORT=8080
+
+EXPOSE 8080
+
+CMD [ "npm", "start" ]

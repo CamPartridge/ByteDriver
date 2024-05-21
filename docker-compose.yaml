@@ -1,96 +1,108 @@
 networks:
   byte_driver_network:
+    name: byte_driver_network
+    # driver: host
 
 services:
 
-  restaurantService:
-    image: restaurant-service
-    build:
-      context: ./backend/restaurantService
-    ports:
-      - 80:80
-    networks:
-      - byte_driver_network
-    depends_on:
-      - mongo
+  # restaurantService:
+  #   image: restaurant-service
+  #   build:
+  #     context: ./backend/restaurantService
+  #   ports:
+  #     - 80:80
+  #   networks:
+  #     - byte_driver_network
+  #   depends_on:
+  #     - mongo
   
-  mongo:
-    image: mongo:latest
-    ports:
-      - 27017:27017
-    networks:
-      - byte_driver_network
-    volumes:
-      - mongo_data:/data/db
+  # mongo:
+  #   image: mongo:latest
+  #   ports:
+  #     - 27017:27017
+  #   networks:
+  #     - byte_driver_network
+  #   volumes:
+  #     - mongo_data:/data/db
 
-  redis:
-    image: redis:latest
-    ports:
-      - "6379:6379"
-    networks:
-      - byte_driver_network
+  # redis:
+  #   image: redis:latest
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - byte_driver_network
 
-  mysql_userDB:
-    image:  mysql_users
-    ports:
-      - 8000:3306
-    restart: always
-    build:
-      context: ./backend/userService
-      dockerfile: mysql_userDB.dockerfile
-    volumes:
-      - mysql_userDB_data:/var/lib/mysql
-    networks:
-      - byte_driver_network
+  # mysql_userDB:
+  #   image:  mysql_users
+  #   ports:
+  #     - 8000:3306
+  #   restart: always
+  #   build:
+  #     context: ./backend/userService
+  #     dockerfile: mysql_userDB.dockerfile
+  #   volumes:
+  #     - mysql_userDB_data:/var/lib/mysql
+  #   networks:
+  #     - byte_driver_network
 
-    
   mysql_orderDB:
-    image:  mysql_orders
+    hostname: mysql_orderDB
+    image: mysql_orders
     ports:
-      - 8001:3306
+      - "8001:3306"
     restart: always
     build:
       context: ./backend/orderService
       dockerfile: mysql_orderDB.dockerfile
-    # volumes:
-    #   - mysql_orderDB_data:/var/lib/mysql
     networks:
       - byte_driver_network
 
-  kafka:
-    image: 'bitnami/kafka:latest'
+  orderService:
+    image: order_service
     ports:
-      - '9092:9092'
-    networks:
-      - byte_driver_network
-    volumes:
-      - "kafka_data:/bitnami"
-    environment:
-      - KAFKA_CFG_NODE_ID=0
-      - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
-      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-
-  user_service:
+      - "8086:8080"
+    build: ./backend/orderService
     depends_on:
-      - mysql_userDB
+      - mysql_orderDB
     networks:
       - byte_driver_network
-    build: ./backend/userService
-    ports:
-      - "8080:8080"
+        
 
-  notificationService:
-    build: ./backend/notificationService
-    image: notification_service
-    depends_on:
-      - kafka
-    ports: 
-      - "8085:8080"
-    networks:
-      - byte_driver_network
+
+  # kafka:
+  #   image: 'bitnami/kafka:latest'
+  #   ports:
+  #     - '9092:9092'
+  #   networks:
+  #     - byte_driver_network
+  #   volumes:
+  #     - "kafka_data:/bitnami"
+  #   environment:
+  #     - KAFKA_CFG_NODE_ID=0
+  #     - KAFKA_CFG_PROCESS_ROLES=controller,broker
+  #     - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+  #     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+  #     - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+  #     - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+
+  # user_service:
+  #   depends_on:
+  #     - mysql_userDB
+  #   networks:
+  #     - byte_driver_network
+  #   build: ./backend/userService
+  #   ports:
+  #     - "8080:8080"
+
+  # notificationService:
+  #   build: ./backend/notificationService
+  #   image: notification_service
+  #   depends_on:
+  #     - kafka
+  #   ports: 
+  #     - "8085:8080"
+  #   networks:
+  #     - byte_driver_network
 
 
 volumes:
