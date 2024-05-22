@@ -1,5 +1,6 @@
 networks:
   byte_driver_network:
+    external: false
     # driver: host
 
 services:
@@ -8,6 +9,7 @@ services:
     container_name: eurekaRegistry
     image: steeltoeoss/eureka-server:latest
     hostname: eurekaRegistry
+    restart: always
     ports:
       - 8761:8761
     networks:
@@ -27,11 +29,6 @@ services:
       - byte_driver_network
     depends_on:
       - eurekaRegistry
-      - restaurantService
-      - cartService
-      # - orderService
-      - userService
-      - notificationService
     
   redis:
     image: redis:latest
@@ -54,7 +51,10 @@ services:
       - eurekaRegistry
 
   cartService:
-    image: cart-service
+    container_name: cartService
+    image: cartservice
+    hostname: cartService
+    restart: always
     build:
       context: ./backend/cartService
       dockerfile: Dockerfile
@@ -65,6 +65,7 @@ services:
     depends_on:
       - redis
       - eurekaRegistry
+      - gateway
   
   mongo:
     image: mongo:latest
@@ -75,18 +76,18 @@ services:
     volumes:
       - mongo_data:/data/db
 
-  mysql_userDB:
-    image:  mysql_users
-    ports:
-      - 8000:3306
-    restart: always
-    build:
-      context: ./backend/userService
-      dockerfile: mysql_userDB.dockerfile
-    volumes:
-      - mysql_userDB_data:/var/lib/mysql
-    networks:
-      - byte_driver_network
+  # mysql_userDB:
+  #   image:  mysql_users
+  #   ports:
+  #     - 8000:3306
+  #   restart: always
+  #   build:
+  #     context: ./backend/userService
+  #     dockerfile: mysql_userDB.dockerfile
+  #   volumes:
+  #     - mysql_userDB_data:/var/lib/mysql
+  #   networks:
+  #     - byte_driver_network
 
   # mysql_orderDB:
   #   image:  mysql_orders
@@ -113,42 +114,42 @@ services:
   #     - kafka
   #     - eurekaRegistry
 
-  kafka:
-    image: 'bitnami/kafka:latest'
-    ports:
-      - '9092:9092'
-    networks:
-      - byte_driver_network
-    volumes:
-      - "kafka_data:/bitnami"
-    environment:
-      - KAFKA_CFG_NODE_ID=0
-      - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
-      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+  # kafka:
+  #   image: 'bitnami/kafka:latest'
+  #   ports:
+  #     - '9092:9092'
+  #   networks:
+  #     - byte_driver_network
+  #   volumes:
+  #     - "kafka_data:/bitnami"
+  #   environment:
+  #     - KAFKA_CFG_NODE_ID=0
+  #     - KAFKA_CFG_PROCESS_ROLES=controller,broker
+  #     - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+  #     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+  #     - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+  #     - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
 
-  userService:
-    image: user_service
-    hostname: userService
-    depends_on:
-      - mysql_userDB
-    networks:
-      - byte_driver_network
-    build: ./backend/userService
-    ports:
-      - "8080:8080"
+  # userService:
+  #   image: user_service
+  #   hostname: userService
+  #   depends_on:
+  #     - mysql_userDB
+  #   networks:
+  #     - byte_driver_network
+  #   build: ./backend/userService
+  #   ports:
+  #     - "8080:8080"
 
-  notificationService:
-    build: ./backend/notificationService
-    image: notification_service
-    depends_on:
-      - kafka
-    ports: 
-      - "8085:8080"
-    networks:
-      - byte_driver_network
+  # notificationService:
+  #   build: ./backend/notificationService
+  #   image: notification_service
+  #   depends_on:
+  #     - kafka
+  #   ports: 
+  #     - "8085:8080"
+  #   networks:
+  #     - byte_driver_network
         
 volumes:
   kafka_data:

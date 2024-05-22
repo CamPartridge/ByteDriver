@@ -17,12 +17,16 @@ class BeanConfig {
 
     @Bean
     fun redisTemplate(connectionFactory: RedisConnectionFactory, objectMapper: ObjectMapper): RedisTemplate<String, Cart> {
-        val template = RedisTemplate<String, Cart>()
-        template.connectionFactory = connectionFactory
-        template.setDefaultSerializer(org.springframework.data.redis.serializer.StringRedisSerializer())
-        template.setHashKeySerializer(org.springframework.data.redis.serializer.StringRedisSerializer())
-        template.setHashValueSerializer(org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer(objectMapper))
-        return template
+        return RedisTemplate<String, Cart>().apply {
+            setConnectionFactory(connectionFactory)
+            setDefaultSerializer(org.springframework.data.redis.serializer.StringRedisSerializer())
+            setHashKeySerializer(org.springframework.data.redis.serializer.StringRedisSerializer())
+            setHashValueSerializer(
+                org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer(
+                    objectMapper
+                )
+            )
+        }
     }
 
     @Bean

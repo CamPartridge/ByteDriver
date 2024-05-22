@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\A-Folder-For-Neumont\\Y2Q3\\SENProjects\\ByteDriver\\ByteDriver\\backend\\gatewayService\\apigateway-ocelot-dotnet8.csproj": {}
+    "C:\\A-Folder-For-Neumont\\Y2Q3\\SEN300Perfection\\apigateway-ocelot-dotnet8\\apigateway-ocelot-dotnet8.csproj": {}
   },
   "projects": {
-    "C:\\A-Folder-For-Neumont\\Y2Q3\\SENProjects\\ByteDriver\\ByteDriver\\backend\\gatewayService\\apigateway-ocelot-dotnet8.csproj": {
+    "C:\\A-Folder-For-Neumont\\Y2Q3\\SEN300Perfection\\apigateway-ocelot-dotnet8\\apigateway-ocelot-dotnet8.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\A-Folder-For-Neumont\\Y2Q3\\SENProjects\\ByteDriver\\ByteDriver\\backend\\gatewayService\\apigateway-ocelot-dotnet8.csproj",
+        "projectUniqueName": "C:\\A-Folder-For-Neumont\\Y2Q3\\SEN300Perfection\\apigateway-ocelot-dotnet8\\apigateway-ocelot-dotnet8.csproj",
         "projectName": "apigateway-ocelot-dotnet8",
-        "projectPath": "C:\\A-Folder-For-Neumont\\Y2Q3\\SENProjects\\ByteDriver\\ByteDriver\\backend\\gatewayService\\apigateway-ocelot-dotnet8.csproj",
+        "projectPath": "C:\\A-Folder-For-Neumont\\Y2Q3\\SEN300Perfection\\apigateway-ocelot-dotnet8\\apigateway-ocelot-dotnet8.csproj",
         "packagesPath": "C:\\Users\\eheil\\.nuget\\packages\\",
-        "outputPath": "C:\\A-Folder-For-Neumont\\Y2Q3\\SENProjects\\ByteDriver\\ByteDriver\\backend\\gatewayService\\obj\\",
+        "outputPath": "C:\\A-Folder-For-Neumont\\Y2Q3\\SEN300Perfection\\apigateway-ocelot-dotnet8\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -102,7 +102,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

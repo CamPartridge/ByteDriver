@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/3YXfCwcyjIJcwWygDhJTtUuvTs7f/I9+Ku+apd7lqFSR8K+tHxuijZ0RoDd5oL3Bgpd+CawAYGgZvCJPYoZdw==",
+  "dgSpecHash": "BRLKynzcmZEznDIQOkNWIYXypRqpDzqp77KpstQoqv5tVuJL8wsxMoazZIv11L8UuR8mFBqAQnK54lbBESgOHw==",
   "success": true,
-  "projectFilePath": "C:\\A-Folder-For-Neumont\\Y2Q3\\SENProjects\\ByteDriver\\ByteDriver\\backend\\gatewayService\\apigateway-ocelot-dotnet8.csproj",
+  "projectFilePath": "C:\\A-Folder-For-Neumont\\Y2Q3\\SEN300Perfection\\apigateway-ocelot-dotnet8\\apigateway-ocelot-dotnet8.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\eheil\\.nuget\\packages\\cachemanager.core\\2.0.0-beta-1629\\cachemanager.core.2.0.0-beta-1629.nupkg.sha512",
     "C:\\Users\\eheil\\.nuget\\packages\\cachemanager.microsoft.extensions.configuration\\2.0.0-beta-1629\\cachemanager.microsoft.extensions.configuration.2.0.0-beta-1629.nupkg.sha512",
