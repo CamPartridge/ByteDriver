@@ -88,30 +88,30 @@ services:
     networks:
       - byte_driver_network
 
-  # mysql_orderDB:
-  #   image:  mysql_orders
-  #   ports:
-  #     - 8001:3306
-  #   restart: always
-  #   build:
-  #     context: ./backend/orderService
-  #     dockerfile: mysql_orderDB.dockerfile
-  #   # volumes:
-  #   #   - mysql_orderDB_data:/var/lib/mysql
-  #   networks:
-  #     - byte_driver_network
+  mysql_orderDB:
+    image:  mysql_orders
+    ports:
+      - 8001:3306
+    restart: always
+    build:
+      context: ./backend/orderService
+      dockerfile: mysql_orderDB.dockerfile
+    # volumes:
+    #   - mysql_orderDB_data:/var/lib/mysql
+    networks:
+      - byte_driver_network
 
-  # orderService:
-  #   image: order_service
-  #   hostname: orderService
-  #   ports:
-  #     - "8086:8080"
-  #   build: ./backend/orderService
-  #   networks:
-  #     - byte_driver_network
-  #   depends_on:
-  #     - kafka
-  #     - eurekaRegistry
+  orderService:
+    image: order_service
+    hostname: orderService
+    ports:
+      - "8086:8080"
+    build: ./backend/orderService
+    networks:
+      - byte_driver_network
+    depends_on:
+      - kafka
+      - eurekaRegistry
 
   kafka:
     image: 'bitnami/kafka:latest'
