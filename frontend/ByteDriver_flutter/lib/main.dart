@@ -1,3 +1,4 @@
+import 'package:bytedriver_app/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,27 +12,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'ByteDriver',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
+          useMaterial3: true,
+
+          // Define the default brightness and colors.
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFF01D758),
+
+            brightness: Brightness.dark,
+          ),
+          scaffoldBackgroundColor: const Color(0xFF000e01)
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: ''),
     );
   }
 }
@@ -55,40 +48,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
-  void _byterButton(){
+  void _byterButton() {
     print('GOING TO BYTER PAGE');
   }
 
-  void _driverButton(){
+  void _driverButton() {
     print('GOING TO DRIVER PAGE');
+  }
+
+  void _login(){
+    print('GOING TO LOGIN PAGE');
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const login())
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
+
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -124,41 +106,75 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Row(
               children: <Widget>[
-                ElevatedButton(
-                  child: Text("Byter Button", style: TextStyle(fontSize: 30)),
-                  onPressed: _byterButton,
-                  style: (
-                      ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                        foregroundColor: MaterialStateProperty.all<Color>   (Colors.greenAccent),
-                        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
+                Container(
+                  margin: EdgeInsets.only(left: 12, right: 5),
+                  child: ElevatedButton(
+                    child: Text("Byter", style: TextStyle(fontSize: 30)),
+                    onPressed: _byterButton,
+                    style: (ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            Colors.greenAccent),
+                        // padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
                         elevation: MaterialStateProperty.all<double>(10),
-                      )
+                        minimumSize:
+                            MaterialStateProperty.all<Size>(Size(205, 200)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        )))),
                   ),
-
-
                 ),
-                ElevatedButton(
-                  child: Text("Driver Button", style: TextStyle(fontSize: 30)),
-                  onPressed: _driverButton,
-                  style: (
-                      ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                        foregroundColor: MaterialStateProperty.all<Color>   (Colors.greenAccent),
-                        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
+                Container(
+                  margin: EdgeInsets.only(right: 12, left: 5),
+                  child: ElevatedButton(
+                    child:
+                        Text("Driver", style: TextStyle(fontSize: 30)),
+                    onPressed: _driverButton,
+                    style: (ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            Colors.greenAccent),
+                        // padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
                         elevation: MaterialStateProperty.all<double>(10),
-                      )
+                        minimumSize:
+                            MaterialStateProperty.all<Size>(Size(205, 200)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        )))),
                   ),
-                )//function
+                ), //function
               ],
-            )
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 25),
+              child: ElevatedButton(
+                child:
+                Text("Login", style: TextStyle(fontSize: 30)),
+                onPressed: _login,
+                style: (ButtonStyle(
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.black),
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                        Colors.greenAccent),
+                    // padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
+                    elevation: MaterialStateProperty.all<double>(10),
+                    minimumSize:
+                    MaterialStateProperty.all<Size>(Size(205, 100)),
+                    shape:
+                    MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        )))),
+              ),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

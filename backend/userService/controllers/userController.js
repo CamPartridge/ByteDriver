@@ -41,12 +41,12 @@ const userController = {
             res.status(500).send("In userController.read: " + error)
         }
     },
-    readByPhoneNumber: async (req, res, next) => {
+    readByEmail: async (req, res, next) => {
         try {
-            const PhoneNumber = req.body.PhoneNumber
+            const Email = req.body.Email
             const user = await User.findAll({
                 where: {
-                    PhoneNumber
+                    Email
                 }
             })
 

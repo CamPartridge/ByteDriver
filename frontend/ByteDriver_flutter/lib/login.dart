@@ -1,17 +1,24 @@
+import 'package:bytedriver_app/sing_up.dart';
 import 'package:flutter/material.dart';
 
-class sign_in extends StatefulWidget {
-  const sign_in({super.key});
+class login extends StatefulWidget {
+  const login({super.key});
 
   @override
-  State<sign_in> createState() => _SecondState();
+  State<login> createState() => _SecondState();
 }
 
-class _SecondState extends State<sign_in> {
+class _SecondState extends State<login> {
 
 
   void _goBack() {
     Navigator.pop(context);
+  }
+
+  void _signUP() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const sign_in())
+    );
   }
 
 
@@ -47,7 +54,7 @@ class _SecondState extends State<sign_in> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
 
-                    SizedBox(height: 100,),
+                    SizedBox(height: 200,),
                     Text(
                       "Login",
                       style: TextStyle(color: const Color(0xFF0DF205),
@@ -111,31 +118,22 @@ class _SecondState extends State<sign_in> {
 
                       ),
                     ),
-                    Row(
+                    Column(
                       children: <Widget> [
+                        SizedBox(height: 30,),
                         Text(
                         "No Account?",
                         style: TextStyle(color: const Color(0xFF0DF205),
                           fontSize: 25,),
                         ),
-                        ElevatedButton(
-                        child: Text("Byter", style: TextStyle(fontSize: 30)),
-                        onPressed: _goBack,
-                        style: (ButtonStyle(
-                            backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.black),
-                            foregroundColor: MaterialStateProperty.all<Color>(
-                                Colors.greenAccent),
-                            // padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
-                            elevation: MaterialStateProperty.all<double>(10),
-                            minimumSize:
-                            MaterialStateProperty.all<Size>(Size(205, 200)),
-                            shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                )))),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 100),
+                          child: MaterialButton(
+                            minWidth: double.infinity,
+                            onPressed: _signUP,
+                            child: Text('Sign Up Now!', style: TextStyle(fontSize: 20, color: const Color(0xFF000000))),
+                            color: const Color(0xFF00cc00),),
+                        ),
       ]
                     ),
                   ]

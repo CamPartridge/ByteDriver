@@ -10,7 +10,7 @@ router.post("/", authController.register, userController.create)
 
 router.get("/test", userController.test)
 
-router.post("/login", userController.readByPhoneNumber, authController.login)
+router.post("/login", userController.readByEmail, authController.login)
 
 router.get("/findType/:type", userController.readByType)
 
