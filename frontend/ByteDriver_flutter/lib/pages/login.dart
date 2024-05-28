@@ -63,6 +63,8 @@ class _SecondState extends State<login> {
       User loggedInUser = new User.fromJson(jsonDecode(response.body));
       userEmail = loggedInUser.email;
       userID = loggedInUser.userid;
+      savedUser = loggedInUser;
+
       isLoggedIn = true;
 
       emailController.clear();

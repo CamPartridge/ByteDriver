@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import 'package:toast/toast.dart';
 
+import 'package:http/http.dart' as http;
+
 void main() {
   runApp(const MyApp());
 }
@@ -56,7 +58,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
 
-  void _byterButton() {
+  Future<void> _byterButton() async{
     print('GOING TO BYTER PAGE');
     if(!isLoggedIn){
       Toast.show("Please Login before going to Byter Page",
@@ -65,13 +67,25 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.white70
       );
     } else {
+
+      String url = "http://10.0.2.2:8080/user/${userID}/changetype/Byter";
+
+      final requestLink = Uri.parse(url);
+
+      http.Response response = await http.patch(
+        requestLink,
+        headers: {"Content-Type": "application/json"},
+        body: "",
+      );
+
+      print(response.statusCode);
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => const byter())
       );
     }
   }
 
-  void _driverButton() {
+  Future<void> _driverButton() async{
     print('GOING TO DRIVER PAGE');
     if(!isLoggedIn){
       Toast.show("Please Login before going to Driver Page",
@@ -80,6 +94,19 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.white70
       );
     } else {
+
+      String url = "http://10.0.2.2:8080/user/${userID}/changetype/Driver";
+
+      final requestLink = Uri.parse(url);
+
+      http.Response response = await http.patch(
+        requestLink,
+        headers: {"Content-Type": "application/json"},
+        body: "",
+      );
+
+      print(response.statusCode);
+
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => const driver())
       );
