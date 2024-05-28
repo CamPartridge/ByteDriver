@@ -39,16 +39,17 @@ services:
 
   restaurantService:
     image: restaurant-service
-    hostname: restaurantService
+    #hostname: restaurantService
     build:
       context: ./backend/restaurantService
-    ports:
-      - 9001:8080
     networks:
       - byte_driver_network
     depends_on:
       - mongo
       - eurekaRegistry
+    deploy:
+      mode: replicated
+      replicas: 3
 
   cartService:
     container_name: cartService
@@ -60,6 +61,39 @@ services:
       dockerfile: Dockerfile
     ports:
       - 9000:8080
+    networks:
+      - byte_driver_network
+    depends_on:
+      - redis
+      - eurekaRegistry
+      - gateway
+  
+  cartService1:
+    container_name: cartService1
+    image: cartservice
+    restart: always
+    build:
+      context: ./backend/cartService
+      dockerfile: Dockerfile
+    ports:
+      - 10001:8080
+    networks:
+      - byte_driver_network
+    depends_on:
+      - redis
+      - eurekaRegistry
+      - gateway
+
+  cartService2:
+    container_name: cartService2
+    image: cartservice
+    hostname: cartService
+    restart: always
+    build:
+      context: ./backend/cartService
+      dockerfile: Dockerfile
+    ports:
+      - 10002:8080
     networks:
       - byte_driver_network
     depends_on:

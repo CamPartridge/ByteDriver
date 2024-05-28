@@ -75,6 +75,119 @@
   ]
 }
 
+{
+  "name": "Pasta Paradise",
+  "hours": "Mon-Fri: 11:00 AM - 10:00 PM, Sat-Sun: 12:00 PM - 11:00 PM",
+  "location": "101 Noodle Lane, Carbo City, NY 12345",
+  "menu": [
+    {
+      "name": "Spaghetti Bolognese",
+      "description": "Traditional Italian spaghetti with a rich meat sauce",
+      "price": 13.99
+    },
+    {
+      "name": "Fettuccine Alfredo",
+      "description": "Creamy Alfredo sauce served over fettuccine pasta",
+      "price": 12.99
+    },
+    {
+      "name": "Lasagna",
+      "description": "Layers of pasta, cheese, and meat sauce baked to perfection",
+      "price": 14.99
+    },
+    {
+      "name": "Penne Arrabbiata",
+      "description": "Penne pasta in a spicy tomato sauce",
+      "price": 11.99
+    },
+    {
+      "name": "Ravioli",
+      "description": "Cheese-filled ravioli served with marinara sauce",
+      "price": 13.49
+    },
+    {
+      "name": "Chicken Parmesan",
+      "description": "Breaded chicken breast topped with marinara sauce and melted cheese, served with spaghetti",
+      "price": 15.99
+    },
+    {
+      "name": "Gnocchi",
+      "description": "Potato dumplings served with your choice of marinara or pesto sauce",
+      "price": 12.49
+    },
+    {
+      "name": "Pasta Primavera",
+      "description": "Pasta with fresh vegetables and a light garlic and olive oil sauce",
+      "price": 13.99
+    },
+    {
+      "name": "Seafood Linguine",
+      "description": "Linguine pasta with a mix of fresh seafood in a white wine and garlic sauce",
+      "price": 16.99
+    }
+  ]
+}
+
+
+{
+  "name": "Burger Barn",
+  "hours": "Mon-Sun: 11:00 AM - 11:00 PM",
+  "location": "202 Grill Street, Burger Town, TX 67890",
+  "menu": [
+    {
+      "name": "Classic Cheeseburger",
+      "description": "Beef patty with cheddar cheese, lettuce, tomato, and pickles",
+      "price": 8.99
+    },
+    {
+      "name": "Bacon Burger",
+      "description": "Beef patty topped with crispy bacon, lettuce, tomato, and BBQ sauce",
+      "price": 10.49
+    },
+    {
+      "name": "Mushroom Swiss Burger",
+      "description": "Beef patty with sautéed mushrooms and Swiss cheese",
+      "price": 9.99
+    },
+    {
+      "name": "Veggie Burger",
+      "description": "Grilled veggie patty with lettuce, tomato, and avocado",
+      "price": 8.49
+    },
+    {
+      "name": "BBQ Chicken Sandwich",
+      "description": "Grilled chicken breast with BBQ sauce, lettuce, and tomato",
+      "price": 9.99
+    },
+    {
+      "name": "Buffalo Chicken Sandwich",
+      "description": "Crispy chicken breast tossed in buffalo sauce, with lettuce and blue cheese dressing",
+      "price": 9.99
+    },
+    {
+      "name": "Turkey Burger",
+      "description": "Lean turkey patty with lettuce, tomato, and cranberry mayo",
+      "price": 9.49
+    },
+    {
+      "name": "Double Decker Burger",
+      "description": "Two beef patties with cheddar cheese, lettuce, tomato, and special sauce",
+      "price": 11.99
+    },
+    {
+      "name": "BBQ Pulled Pork Sandwich",
+      "description": "Slow-cooked pulled pork with BBQ sauce and coleslaw",
+      "price": 10.99
+    },
+    {
+      "name": "Fish Sandwich",
+      "description": "Crispy fish fillet with tartar sauce, lettuce, and tomato",
+      "price": 8.99
+    }
+  ]
+}
+
+
 
 ********** DUMMY MENU ITEMS TO ADD FOR TESTING **********
 
