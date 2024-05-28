@@ -1,5 +1,10 @@
-import 'package:bytedriver_app/login.dart';
+import 'package:bytedriver_app/pages/byter.dart';
+import 'package:bytedriver_app/pages/driver.dart';
+import 'package:bytedriver_app/pages/login.dart';
+import 'package:bytedriver_app/variables.dart';
 import 'package:flutter/material.dart';
+
+import 'package:toast/toast.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ByteDriver',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           useMaterial3: true,
 
@@ -52,10 +58,32 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _byterButton() {
     print('GOING TO BYTER PAGE');
+    if(!isLoggedIn){
+      Toast.show("Please Login before going to Byter Page",
+          duration: 3,
+          textStyle: TextStyle (fontSize:50, color: Colors.red),
+          backgroundColor: Colors.white70
+      );
+    } else {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const byter())
+      );
+    }
   }
 
   void _driverButton() {
     print('GOING TO DRIVER PAGE');
+    if(!isLoggedIn){
+      Toast.show("Please Login before going to Driver Page",
+          duration: 3,
+          textStyle: TextStyle (fontSize:50, color: Colors.red),
+          backgroundColor: Colors.white70
+      );
+    } else {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const driver())
+      );
+    }
   }
 
   void _login(){
@@ -68,6 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
+    ToastContext().init(context);
     return Scaffold(
       appBar: AppBar(
 
@@ -97,81 +126,62 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'ByteDriver',
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: TextStyle(fontSize: 75, color: const Color(0xFF8bff00)),
             ),
             Text(
               'How would you like to fuel your brain today?',
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: TextStyle(fontSize: 35,),
               textAlign: TextAlign.center,
             ),
+            SizedBox(height: 60,),
             Row(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(left: 12, right: 5),
-                  child: ElevatedButton(
-                    child: Text("Byter", style: TextStyle(fontSize: 30)),
-                    onPressed: _byterButton,
-                    style: (ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.black),
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            Colors.greenAccent),
-                        // padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
-                        elevation: MaterialStateProperty.all<double>(10),
-                        minimumSize:
-                            MaterialStateProperty.all<Size>(Size(205, 200)),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
+                  margin: EdgeInsets.only(right: 12, left: 5),
+                  child: ElevatedButton.icon(onPressed: _byterButton,
+                    icon: Icon(Icons.fastfood, size: 40), // Add your icon here
+                    label: Text("Byter", style: TextStyle(fontSize: 40)),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00cc00)),
+                      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                      elevation: MaterialStateProperty.all<double>(10),
+                      minimumSize: MaterialStateProperty.all<Size>(Size(205, 200)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-                        )))),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(right: 12, left: 5),
-                  child: ElevatedButton(
-                    child:
-                        Text("Driver", style: TextStyle(fontSize: 30)),
-                    onPressed: _driverButton,
-                    style: (ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.black),
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            Colors.greenAccent),
-                        // padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
-                        elevation: MaterialStateProperty.all<double>(10),
-                        minimumSize:
-                            MaterialStateProperty.all<Size>(Size(205, 200)),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
+                  child: ElevatedButton.icon(onPressed: _driverButton,
+                    icon: Icon(Icons.directions_car, size: 40), // Add your icon here
+                    label: Text("Driver", style: TextStyle(fontSize: 40)),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00cc00)),
+                      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                      elevation: MaterialStateProperty.all<double>(10),
+                      minimumSize: MaterialStateProperty.all<Size>(Size(205, 200)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
-                        )))),
+                        ),
+                      ),
+                    ),
                   ),
                 ), //function
               ],
             ),
-            Container(
-              margin: EdgeInsets.only(top: 25),
-              child: ElevatedButton(
-                child:
-                Text("Login", style: TextStyle(fontSize: 30)),
+            SizedBox(height: 30,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 100),
+              child: MaterialButton(
+                minWidth: double.infinity,
                 onPressed: _login,
-                style: (ButtonStyle(
-                    backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.black),
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        Colors.greenAccent),
-                    // padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
-                    elevation: MaterialStateProperty.all<double>(10),
-                    minimumSize:
-                    MaterialStateProperty.all<Size>(Size(205, 100)),
-                    shape:
-                    MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        )))),
-              ),
+                child: Text('Login', style: TextStyle(fontSize: 20, color: const Color(0xFFFFFFFF))),
+                color: const Color(0xFF006d25),),
             ),
           ],
         ),

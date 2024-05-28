@@ -30,9 +30,10 @@ const authController = {
         }
     }, 
     login: async (req, res) => {
-        const user = res.locals.User[0]
+        const user = res.locals.User
+        console.log(user)
 
-        if (user.PhoneNumber === req.body.PhoneNumber) {
+        if (user.Email === req.body.Email) {
             if (security.comparePassword(req.body.Password, user.Password)) {
                 delete user.dataValues.Password;
                 res.status(200).send(user)
@@ -40,7 +41,7 @@ const authController = {
                 res.status(401).send("Incorrect Password")
             }
         } else {
-            res.status(401).send("Phone Number not found")
+            res.status(401).send("Email not found")
         }
     },
 

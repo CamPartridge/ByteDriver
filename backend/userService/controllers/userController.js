@@ -44,7 +44,7 @@ const userController = {
     readByEmail: async (req, res, next) => {
         try {
             const Email = req.body.Email
-            const user = await User.findAll({
+            const user = await User.findOne({
                 where: {
                     Email
                 }

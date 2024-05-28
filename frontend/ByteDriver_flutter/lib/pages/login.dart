@@ -1,5 +1,13 @@
-import 'package:bytedriver_app/sing_up.dart';
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:bytedriver_app/pages/sign_up.dart';
+import 'package:bytedriver_app/variables.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
+
+import 'package:bytedriver_app/models/User.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -11,19 +19,75 @@ class login extends StatefulWidget {
 class _SecondState extends State<login> {
 
 
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+
   void _goBack() {
     Navigator.pop(context);
   }
 
   void _signUP() {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const sign_in())
+        MaterialPageRoute(builder: (context) => const sign_up())
     );
+  }
+
+
+  Future<void> _loginUser() async{
+
+    print("Login user");
+
+    print(emailController.text.toString());
+    print(passwordController.text.toString());
+
+    Map loginUser = {
+      'Email' : emailController.text.toString(),
+      'Password': passwordController.text.toString(),
+    };
+
+    String url = "http://10.0.2.2:8080/user/login";
+
+    var loginUserJSON = jsonEncode(loginUser);
+
+    final requestLink = Uri.parse(url);
+
+    http.Response response = await http.post(
+      requestLink,
+      headers: {"Content-Type": "application/json"},
+      body: loginUserJSON,
+    );
+
+    if (response.statusCode == 200) {
+      print(jsonDecode(response.body));
+      User loggedInUser = new User.fromJson(jsonDecode(response.body));
+      userEmail = loggedInUser.email;
+      userID = loggedInUser.userid;
+      isLoggedIn = true;
+
+      emailController.clear();
+      passwordController.clear();
+
+      _goBack();
+    } else if (response.statusCode == 401){
+      Toast.show("Incorrect Password :( \nPlease try again.",
+          duration: 3,
+          textStyle: TextStyle (fontSize:50, color: Colors.red),
+          backgroundColor: Colors.white70
+      );
+    }else if (response.statusCode == 404){
+      Toast.show("No user found with that Email :(",
+          duration: 3,
+          textStyle: TextStyle (fontSize:50, color: Colors.red),
+          backgroundColor: Colors.white70
+      );
+    }
   }
 
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return Scaffold(
         backgroundColor: const Color(0xFF000e01),
         floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
@@ -68,6 +132,7 @@ class _SecondState extends State<login> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 35),
                             child: TextFormField(
+                              controller: emailController,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 labelText: "Email",
@@ -87,6 +152,7 @@ class _SecondState extends State<login> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 35),
                             child: TextFormField(
+                              controller: passwordController,
                               keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
                                 labelText: "Password",
@@ -109,7 +175,7 @@ class _SecondState extends State<login> {
                             padding: const EdgeInsets.symmetric(horizontal: 35),
                             child: MaterialButton(
                               minWidth: double.infinity,
-                                onPressed: () {},
+                                onPressed: _loginUser,
                                 child: Text('Submit', style: TextStyle(fontSize: 30)),
                                 color: const Color(0xFF055902),),
                           )

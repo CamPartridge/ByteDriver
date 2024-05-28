@@ -1,2 +1,3 @@
+String userEmail = "";
 int userID = -1;
-bool isSignedIn = false;
+bool isLoggedIn = false;
