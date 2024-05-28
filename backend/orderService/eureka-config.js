@@ -12,7 +12,7 @@ const client = new Eureka({
       '@enabled': 'true',
     },
     vipAddress: 'orderService', // The VIP address for your service
-    statusPageUrl: 'http://localhost:8080/', // Health check url
+    statusPageUrl: 'http://localhost:8086/', // Health check url
     dataCenterInfo: {
       '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
       name: 'MyOwn', // Specify your data center info
