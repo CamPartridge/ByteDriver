@@ -4,7 +4,7 @@ USE OrderDB;
 
 CREATE TABLE Users(
     UserID INT NOT NULL,
-    Email BIGINT NOT NULL UNIQUE,
+    Email VARCHAR(50) NOT NULL UNIQUE,
     FirstName VARCHAR(50) NOT NULL,
     LastName VARCHAR(50) NOT NULL,
     PRIMARY KEY (UserID)
@@ -27,6 +27,10 @@ CREATE TABLE Orders(
     ItemPrice DECIMAL(19,4) NOT NULL,
     Quantity INT NOT NULL,
     PRIMARY KEY (ID)
-) AUTO_INCREMENT=100
+) AUTO_INCREMENT=100;
+
+use OrderDB;
+INSERT INTO Users (UserID, Email, FirstName, LastName)
+VALUES (0, 'none', 'none', 'none');
 
 

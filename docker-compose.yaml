@@ -131,8 +131,8 @@ services:
     build:
       context: ./backend/orderService
       dockerfile: mysql_orderDB.dockerfile
-    # volumes:
-    #   - mysql_orderDB_data:/var/lib/mysql
+    volumes:
+      - mysql_orderDB_data:/var/lib/mysql
     networks:
       - byte_driver_network
 
